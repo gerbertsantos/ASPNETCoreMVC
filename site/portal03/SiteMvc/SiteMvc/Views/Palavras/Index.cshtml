@@ -6,8 +6,8 @@
 
 <h2>Palavras - Listagem</h2>
 
-<a href="/palavras/cadastrar" class="btn btn-primary"></a>
-
+<a href="/palavras/cadastrar" class="btn btn-primary">Cadastrar</a><br />
+<span>Total</span>@ViewBag.Palavras.Count
 <table class="table table-striped">
     <thead>
         <tr>
@@ -18,14 +18,17 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Elefante</td>
-            <td>Fácil</td>
-            <td>
-                <a href="/palavras/atualizar/1" class="btn btn-primary">Editar</a>
-                <a href="/palavras/excluir/1" class="btn btn-danger">Excluir</a>
-            </td>
-        </tr>
-    </tbody>
+        @foreach (var palavra in ViewBag.Palavras)
+        {
+            <tr>
+                <th scope="row">@palavra.Id</th>
+                <td>@palavra.Nome</td>
+                <td>@palavra.Nivel</td>
+                <td>
+                    <a href="/palavras/atualizar/@palavra.Id" class="btn btn-primary">Editar</a>
+                    <a href="/palavras/excluir/@palavra.Id" class="btn btn-danger">Excluir</a>
+                </td>
+            </tr>
+        }
+     </tbody>
 </table>
