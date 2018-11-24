@@ -21,8 +21,9 @@ namespace SiteMvc.Controllers
         //Listar todos os regirtros do banco de dados
         public IActionResult Index()
         {
-            ViewBag.Palavras = _db.Palavras.ToList();
-            return View();
+            //ViewBag.Palavras = _db.Palavras.ToList();
+            var palavras = _db.Palavras.ToList();
+            return View(palavras);
         }
 
         //Criar o CRUD

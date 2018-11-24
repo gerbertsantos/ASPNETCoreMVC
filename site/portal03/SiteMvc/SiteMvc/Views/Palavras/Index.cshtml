@@ -1,4 +1,4 @@
-﻿
+﻿@model List<SiteMvc.Models.Palavra>
 @{
     ViewData["Title"] = "Lista de Palavras";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +7,7 @@
 <h2>Palavras - Listagem</h2>
 
 <a href="/palavras/cadastrar" class="btn btn-primary">Cadastrar</a><br />
-<span>Total</span>@ViewBag.Palavras.Count
+<span>Total de registros:</span> @Model.Count
 <table class="table table-striped">
     <thead>
         <tr>
@@ -18,7 +18,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var palavra in ViewBag.Palavras)
+        @foreach (var palavra in Model)
         {
             <tr>
                 <th scope="row">@palavra.Id</th>
@@ -30,5 +30,5 @@
                 </td>
             </tr>
         }
-     </tbody>
+    </tbody>
 </table>
