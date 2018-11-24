@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "Lista de Palavras";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Palavras - Listagem</h2>
+
+<a href="/palavras/cadastrar" class="btn btn-primary"></a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Palavra</th>
+            <th scope="col">Nivel</th>
+            <th scope="col">Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Elefante</td>
+            <td>Fácil</td>
+            <td>
+                <a href="/palavras/atualizar/1" class="btn btn-primary">Editar</a>
+                <a href="/palavras/excluir/1" class="btn btn-danger">Excluir</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
