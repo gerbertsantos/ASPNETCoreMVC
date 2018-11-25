@@ -11,6 +11,7 @@ namespace SiteMvc.Database
     {
         //Criando a tabela na base baseada no modelo
         public DbSet<Palavra> Palavras { get; set; }
+        public object Palavra { get; internal set; }
 
         public DatabaseContext( DbContextOptions<DatabaseContext> options) : base (options)
         {

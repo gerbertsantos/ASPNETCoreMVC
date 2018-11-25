@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SiteMvc.Database;
 using SiteMvc.Models;
@@ -31,32 +28,51 @@ namespace SiteMvc.Controllers
         [HttpGet]
         public IActionResult Cadastrar()
         {
-            return View();
+            return View(new Palavra());
         }
 
         [HttpPost]
         public IActionResult Cadastrar([FromForm] Palavra palavra)
         {
+            if (ModelState.IsValid)
+            {
+                _db.Palavras.Add(palavra);
+                _db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+          
             return View();
         }
 
         [HttpGet]
-        public IActionResult Atualizar()
+        public IActionResult Atualizar(int id)
         {
             //O mesmo formulário (Cadastrar) faz duas funções (Cadastrar e Atualizar), então no método peço para que me envie para o form de cadastro 
-            return View("Cadastrar");
+            Palavra palavra = _db.Palavras.Find(id);
+            return View("Cadastrar", palavra);
         }
 
         [HttpPost]
         public IActionResult Atualizar([FromForm] Palavra palavra)
         {
-            return View("Cadastrar");
+            if (ModelState.IsValid)
+            {
+                _db.Palavras.Update(palavra);
+                _db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            return View("Cadastrar", palavra);
         }
 
         [HttpGet]
-        public IActionResult Excluir(int id)
+        public IActionResult Excluir(int Id)
         {
-            return Redirect("Index");
+            Palavra palavra = _db.Palavras.Find(Id);
+            _db.Palavras.Remove(palavra);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
     }

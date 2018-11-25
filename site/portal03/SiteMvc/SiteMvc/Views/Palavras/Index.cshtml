@@ -7,7 +7,7 @@
 <h2>Palavras - Listagem</h2>
 
 <a href="/palavras/cadastrar" class="btn btn-primary">Cadastrar</a><br />
-<span>Total de registros:</span> @Model.Count
+<span><b>Total de registros:</b></span> @Model.Count
 <table class="table table-striped">
     <thead>
         <tr>
@@ -20,15 +20,47 @@
     <tbody>
         @foreach (var palavra in Model)
         {
-            <tr>
-                <th scope="row">@palavra.Id</th>
-                <td>@palavra.Nome</td>
-                <td>@palavra.Nivel</td>
-                <td>
-                    <a href="/palavras/atualizar/@palavra.Id" class="btn btn-primary">Editar</a>
-                    <a href="/palavras/excluir/@palavra.Id" class="btn btn-danger">Excluir</a>
-                </td>
-            </tr>
+        <tr>
+            <th scope="row">@palavra.Id</th>
+            <td>@palavra.Nome</td>
+            <td>@palavra.Nivel</td>
+            <td>
+                <a href="/palavras/atualizar/@palavra.Id" class="btn btn-primary">Editar</a>
+                @*<a href="/palavras/excluir/@palavra.Id" class="btn btn-danger">Excluir</a>*@
+                <a href="#" id="myId" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter" onclick="AssignButtonClicked(this)" data-assigned-id="@palavra.Id">Excluir</a>                
+            </td>
+        </tr>
         }
     </tbody>
 </table>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Confirmar exclusão</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Realmente deseja excluir a palavra?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                <a type="button"  id="confirmPalavra" class="btn btn-primary" href="">Sim</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function AssignButtonClicked(elem) {
+        var id = $(elem).data('assigned-id');
+        var link = "/palavras/excluir/";
+        var result = link + id;
+        $('#confirmPalavra').attr('href', result);
+    }
+
+</script>
